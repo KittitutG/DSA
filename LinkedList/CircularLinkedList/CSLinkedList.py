@@ -3,6 +3,9 @@ class Node:
         self.value = value
         self.next = None
 
+    def __str__(self) -> str:
+        return str(self.value)
+
 class CSLinkedList:
     def __init__(self,):
         self.head = None
@@ -87,6 +90,37 @@ class CSLinkedList:
                 if temp_node == self.head:
                     break
 
+    def search(self,target):
+        current = self.head
+        while current:
+            if current.value == target:
+                return True
+            current = current.next
+            if current == self.head:
+                break
+        return False
+    
+    def get(self,index):
+        if index ==-1:
+            return self.tail
+
+        elif index <-1 or index >= self.length-1:
+            raise 'Out of boubd index'
+        
+        elif index == 0:
+            return self.head
+        
+        current = self.head
+        for _ in range(index):
+            current = current.next
+        return current
+
+    def set_value(self,index,value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
 my_cslinkedlist = CSLinkedList()
 
 my_cslinkedlist.prepend(10)
@@ -99,4 +133,8 @@ my_cslinkedlist.insert(70,6)
 
 print(my_cslinkedlist)
 # print(my_cslinkedlist.tail.value)
-my_cslinkedlist.traverse()
+# my_cslinkedlist.traverse()
+# print(my_cslinkedlist.search(10))
+print(my_cslinkedlist.get(6))
+print(my_cslinkedlist.set_value(7,99))
+print(my_cslinkedlist)
