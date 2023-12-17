@@ -73,6 +73,9 @@ class LinkedList:
             self.length -= 1
             return popped_node
     def reverse(self):
+        '''
+        https://www.youtube.com/watch?v=TSDl7sRxWdU for better udnerstanding
+        '''
         prev_node = None
         current_node = self.head
         while current_node is not None:
