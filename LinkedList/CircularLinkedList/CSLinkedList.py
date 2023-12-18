@@ -121,6 +121,59 @@ class CSLinkedList:
             temp.value = value
             return True
         return False
+
+    def pop_first(self):
+        poped_node = self.head
+        if self.length ==0:
+            return None
+        if self.length ==1:
+            self.head = self.tail = None
+        else:       
+            self.head = self.head.next
+            self.tail.next = self.head
+            poped_node.next = None
+        self.length -=1
+        return poped_node
+    
+    def pop(self):
+        if self.length ==0:
+            return None
+        poped_node = self.tail
+        if self.length ==1:
+            self.head = self.tail = None
+        else:
+            current_node = self.head
+            while current_node.next is not self.tail:
+                current_node = current_node.next
+            current_node.next = self.head
+            self.tail = current_node
+            poped_node.next = None
+        self.length -=1
+        return poped_node
+
+    def remove(self,index):
+        if index <0 or index>= self.length:
+            return None
+        if index ==0:
+            return self.pop_first()
+        if index ==self.length-1:
+            return self.pop()
+        prev_node = self.get(index-1)
+        poped_node = prev_node.next
+        prev_node.next = poped_node.next
+        poped_node.next = None
+        self.length -=1
+        return poped_node
+
+    def delete_all(self):
+        if self.length == 0:
+            return
+        self.tail.next = None
+        self.head = self.tail = None
+        self.length = 0
+
+
+
 my_cslinkedlist = CSLinkedList()
 
 my_cslinkedlist.prepend(10)
@@ -135,6 +188,8 @@ print(my_cslinkedlist)
 # print(my_cslinkedlist.tail.value)
 # my_cslinkedlist.traverse()
 # print(my_cslinkedlist.search(10))
-print(my_cslinkedlist.get(6))
-print(my_cslinkedlist.set_value(7,99))
+print(my_cslinkedlist.remove(7))
+my_cslinkedlist.delete_all()
+my_cslinkedlist.delete_all()
+
 print(my_cslinkedlist)
