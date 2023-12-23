@@ -90,6 +90,44 @@ class DoublyLinkedList():
                 
             return "Element not found"
 
+    def delete(self,index):
+        if not self.head:
+            return "Empty"
+        elif index == 0:
+            if self.head == self.tail:
+                self.head.next = self.head.prev =None
+                self.head = self.tail = None
+            else:
+                self.head = self.head.next
+                self.head.prev = self.tail
+                self.tail.next = self.head
+        elif index == -1:
+            if self.head == self.tail:
+                self.head.next = self.head.prev =None
+                self.head = self.tail = None
+            else:
+                self.tail = self.tail.prev
+                self.tail.next = self.head
+                self.head.prev = self.tail
+        else:
+            tempNode = self.head
+            for _ in range(index-1):
+                tempNode = tempNode.next
+            tempNode.next = tempNode.next.next
+            tempNode.next.prev = tempNode
+            
+    def delete_all(self):
+        if not self.head:
+            return "Empty"
+        else:         
+            self.tail.next = None
+            tempNode = self.head
+            while tempNode:
+                tempNode.prev = None
+                tempNode = tempNode.next
+            self.head = self.tail = None
+        return "truncateed"
+    
 my_cdll = DoublyLinkedList()
 my_cdll.create(20)
 my_cdll.insert(0,0)
@@ -97,6 +135,11 @@ my_cdll.insert(1,1)
 my_cdll.insert(2,2)
 
 print([i.value for i in my_cdll])
-my_cdll.traversal()
-my_cdll.reverse_travesal()
-print(my_cdll.search(9))
+# my_cdll.traversal()
+# my_cdll.reverse_travesal()
+# print(my_cdll.search(9))
+
+my_cdll.delete(1)
+print([i.value for i in my_cdll])
+my_cdll.delete_all()
+print([i.value for i in my_cdll])
