@@ -60,7 +60,7 @@ def LevelTraversal(rootNode):
     if not rootNode: #if rootNode is none, stop criterea for recursive
         return
     else:
-        custQueue = Queue()
+        custQueue = Queue() #Helper class
         custQueue.enqueue(rootNode)
         while not (custQueue.isEmpty()):     
             root = custQueue.dequeue()
