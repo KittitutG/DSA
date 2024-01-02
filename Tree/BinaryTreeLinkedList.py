@@ -1,6 +1,6 @@
 '''
 create
-insert
+insert -->level order traversal
 delete
 search
 traverse
@@ -70,9 +70,50 @@ def LevelTraversal(rootNode):
 
             if root.value.rightChild is not None:
                 custQueue.enqueue(root.value.rightChild)
+
+def searchBT(rootNode,nodeValue):
+    if not rootNode:
+        return "Tree is empty"
+    else:
+        tempQueue = Queue()
+        tempQueue.enqueue(rootNode)
+        while not (tempQueue.isEmpty()):
+            root  = tempQueue.dequeue()
+            if root.value.data == nodeValue:
+                return "Hit"
+            
+            if  root.value.leftChild is not None:
+                tempQueue.enqueue(root.value.leftChild)
+
+            if root.value.rightChild is not None:
+                tempQueue.enqueue(root.value.rightChild)
+        return "Miss"
+    
+def InsertBT(rootNode,nodeValue):
+    if not rootNode:
+        rootNode = nodeValue
+    else:
+        tempQueue = Queue()
+        tempQueue.enqueue(rootNode)
+        while not (tempQueue.isEmpty()):
+            root = tempQueue.dequeue()
+            if root.value.leftChild is not None:
+                tempQueue.enqueue(root.value.leftChild)
+            else:
+                root.value.leftChild = nodeValue
+                return
+            if root.value.rightChild is not None:
+                tempQueue.enqueue(root.value.rightChild)
+            else:
+                root.value.rightChild = nodeValue    
+                return
         
 
 # PreOrderTraversal(myTree)
 # InOrderTraversal(myTree)
 # PostOrderTraversal(myTree)
+# LevelTraversal(myTree)
+# print(searchBT(myTree,'Cola'))
+newNode = TreeNode('Coffee')
+InsertBT(myTree,newNode)
 LevelTraversal(myTree)
