@@ -69,4 +69,26 @@ def searchNode(rootNode,value):
             searchNode(rootNode.rightChild,value)
 
 
+def insertNode(rootNode,value):
+    '''
+    Case 1: Rotation not required
+    Case 2: Rotation required
+            --Lef Left condition -->clockwise rotation
+            --Lef Right condition
+            --Right Right condition
+            --Right Left condition
+
+    '''
+
+    '''
+    pseudo code for Left Lef condition insert:
+    rotateRight(disbalancedNode):
+        newRoot = disbalancedNode.leftChild
+        disbalancedNode = disbalancedNode.lefChild.rightChild
+        newRoot.rightChild = disbalancedNode
+        update height of disbalancedNode and newRoot
+        return newRoot
+    '''
+    return
+
 my_avl = AVL(10)
