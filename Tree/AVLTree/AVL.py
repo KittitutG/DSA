@@ -72,20 +72,31 @@ def searchNode(rootNode,value):
 def insertNode(rootNode,value):
     '''
     Case 1: Rotation not required
-    Case 2: Rotation required
-            --Lef Left condition -->clockwise rotation
-            --Lef Right condition
-            --Right Right condition
-            --Right Left condition
+    Case 2: Rotation required (imbalanced tree)
+            **below condition is a path from disbalnced node to grandchild**
+            --Lef Left condition -->right rotation
+            --Lef Right condition -->left right rotation
+            --Right Right condition--> left rotation
+            --Right Left condition -->right left rotation
 
     '''
 
     '''
-    pseudo code for Left Lef condition insert:
+    pseudo code for Right rotation condition insert:
     rotateRight(disbalancedNode):
         newRoot = disbalancedNode.leftChild
-        disbalancedNode = disbalancedNode.lefChild.rightChild
+        disbalancedNode.leftChild = disbalancedNode.lefChild.rightChild
         newRoot.rightChild = disbalancedNode
+        update height of disbalancedNode and newRoot
+        return newRoot
+    '''
+
+    '''
+    pseudo code for Left rotation condition insert:
+    rotateLeft(disbalancedNode):
+        newRoot = disbalancedNode.rigthChild
+        disbalancedNode.rightChild = disbalancedNode.rightChild.leftChild
+        newRoot.leftChild = disbalancedNode
         update height of disbalancedNode and newRoot
         return newRoot
     '''
