@@ -151,11 +151,70 @@ def insertNode(rootNode,value):
     if balance < -1 and value > rootNode.rightChild.data:
         return leftRotate(rootNode)
     return rootNode
-    
 
+def getMinNode(rootNode):
+    '''
+    Helper function: this will be used when we removed root node.
+    we require min value from  right subtree to replace the deleted node
+    '''
+    if rootNode is None or rootNode.leftChild is None:
+        return rootNode
+    else:
+        return getMinNode(rootNode.leftChild)
+
+def deleteNode(rootNode,value):
+    '''
+    Case 1: Rotation not required
+    Case 2: Rotation required (imbalanced tree)
+            **below condition is a path from disbalnced node to grandchild**
+            --Lef Left condition -->right rotation
+            --Lef Right condition -->left right rotation
+            --Right Right condition--> left rotation
+            --Right Left condition -->right left rotation
+
+    '''
+    if not rootNode:
+        return
+    elif value < rootNode.data:
+        rootNode.leftChild = deleteNode(rootNode.leftChild,value)
+    elif value > rootNode.data:
+        rootNode.rightChild = deleteNode(rootNode.rightChild,value)
+    else:
+        if rootNode.leftChild is None:
+            temp = rootNode.rightChild
+            rootNode = None
+            return temp
+        if rootNode.rightChild is None:
+            temp = rootNode.leftChild
+            rootNode = None
+            return temp
+        tempNode = getMinNode(rootNode)
+        rootNode.data = temp.data
+        rootNode.rightChild = deleteNode(rootNode.rightChild,tempNode.data)
+    rootNode.height = 1 +max(getHeight(rootNode.leftChild),getHeight(rootNode.rightChild))
+    balance = getBalanced(rootNode)
+    if balance >1 and getBalanced(rootNode.leftChild) >=0:
+        return rightRotate
+    if balance >1 and getBalanced(rootNode.leftChild) <0:
+        rootNode.leftChild = leftRotate(rootNode.leftChild)        
+        return rightRotate(rootNode)
+    if balance <-1 and getBalanced(rootNode.rightChild) <=0:
+        return leftRotate(rootNode)
+    if balance <-1 and getBalanced(rootNode.rightChild) >0:
+        rootNode.rightChild = rightRotate(rootNode.rightChild)
+        return leftRotate(rootNode)
+    return rootNode
+    
+def deleteTree(rootNode):
+    rootNode.data = None
+    rootNode.leftChild = None
+    rootNode.rightChild = None
+    rootNode.height = 0
 
 my_avl = AVL(5)
 my_avl = insertNode(my_avl,10)
 my_avl = insertNode(my_avl,15)
 my_avl = insertNode(my_avl,20)
+my_avl = deleteNode(my_avl,15)
+deleteTree(my_avl)
 LevelOrderTraversal(my_avl)
