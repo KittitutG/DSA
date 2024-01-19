@@ -45,6 +45,54 @@ class Trie:
         print("Cereated succssfully")
 
 
+    def searchString(self,word):
+        cuurent = self.root
+        for i in word:
+            node = cuurent.children.get(i)
+            if node == None:
+                return False
+            cuurent = node
+
+        if cuurent.endOfString == True:
+            return True #complete string
+        else:
+            return False #not a complete string
+
+
+def deleteString(root,word,index):
+    #delete would start to delte from leave up to common string
+    ch = word[index]
+    current = root.children.get(ch)
+    deleteFlag = False
+    
+    if len(current.children) > 1: #move to next node
+        deleteString(current,word,index+1)
+        return False
+    
+    if index == len(word)-1: #last character of the word
+        if len(current.children) >=1: #case when string is substring of others so will just set ending as True
+            current.endOfString = False
+            return False
+        else: #delete node
+            root.children.pop(ch)
+            return True
+        
+    if current.endOfString == True:
+        deleteString(current,word,index+1)
+        return False
+    
+    deleteFlag = deleteString(current,word,index+1)
+    if deleteFlag == True:
+        root.children.pop(ch)
+        return True
+    else:
+        return False
+
+
+    
+
 my_Trie= Trie()
 my_Trie.insert("App")
 my_Trie.insert("Apple")
+deleteString(my_Trie.root, 'App', 0)
+print(my_Trie.searchString('App'))
