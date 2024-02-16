@@ -1,3 +1,5 @@
+from collections import deque
+
 class Graph:
     def __init__(self) -> None:
         self.adj_list = {}
@@ -37,27 +39,60 @@ class Graph:
             del self.adj_list[vertex]
             return True
         return False
+    
 
+    def bfs(self,vertex):
+        '''
+        TC : O(V + E); V is vertex number, E is edege number --> only visit each vertex and edge once
+        SC: O(V)
+        '''
+        visited = set() #result object
+        visited.add(vertex)
+
+        queue = deque([vertex]) #iterate object, using deque from collections lib for better performance
+        while queue:
+            current_vertex = queue.popleft() #popleft has better performace than pop(0)
+            print(current_vertex)
+
+            for adj_vertex  in self.adj_list[current_vertex]:
+                if adj_vertex not in visited:
+                    visited.add(adj_vertex)
+                    queue.append(adj_vertex)
+
+    def dfs(self,vertex):
+        '''
+        TC : O(V + E); V is vertex number, E is edege number --> only visit each vertex and edge once
+        SC: O(V)
+        '''
+        visited = set() #result object
+        stack = [vertex] #iterate object
+        while stack:
+            current_vertex = stack.pop()
+            if current_vertex not in visited:
+                print(current_vertex)
+                visited.add(current_vertex)
+
+            for adj_vertex in self.adj_list[current_vertex]:
+                if adj_vertex not in visited:
+                    stack.append(adj_vertex)
+
+        
 my_graph = Graph()
 my_graph.addVertex("A")
 my_graph.addVertex("B")
 my_graph.addVertex("C")
 my_graph.addVertex("D")
+my_graph.addVertex("E")
 
 my_graph.addEdge("A","B")
 my_graph.addEdge("A","C")
-my_graph.addEdge("A","D")
-my_graph.addEdge("B","C")
+my_graph.addEdge("B","E")
 my_graph.addEdge("C","D")
-
-
+my_graph.addEdge("D","E")
 
 my_graph.printGraph()
 
-my_graph.removeVertex("D")
-print("....")
-my_graph.printGraph()
-
+my_graph.dfs("A")
 
 
 
