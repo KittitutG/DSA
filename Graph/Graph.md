@@ -24,3 +24,8 @@ both have: TC (V + E), SC (V + E)
 when to use
 BFS: known target is as near as starting point
 DFS: known target is as far as strating point
+
+# Cycle Graph
+This is kind of grahp which one node can cameback to itself through travelling to other node (eg. A --> B --> C --> A)
+# Negative Cycle Graph
+This is happening when sum of distance from cycle grap is negatives
