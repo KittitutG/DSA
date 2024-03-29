@@ -29,3 +29,11 @@ DFS: known target is as far as strating point
 This is kind of grahp which one node can cameback to itself through travelling to other node (eg. A --> B --> C --> A)
 # Negative Cycle Graph
 This is happening when sum of distance from cycle grap is negatives
+# Bellman Ford Algorithm 
+This algorothm is used to handle Negative Cycle graph.
+this can detect negative cycle graph.
+nomarlly, this algorithm will run (Vertex - 1) times.
+but if we run the additional 1 time, and the distance of each node change.
+this mean Negative cyclic graph is happening.
+and hence that is the Single shortest path that can happen before we run into a loop on cycle(distance will alway change)
+further disscussion: https://www.youtube.com/watch?v=lyw4FaxrwHg
