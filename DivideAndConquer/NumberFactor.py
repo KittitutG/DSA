@@ -2,7 +2,7 @@
 # Given N Number, find how many way we can get the answer of combination of 1,3,4
 eg. NumberFactor(5)
 f(4) + 1 = [{1,1,1,1} + {4} + {3,1} + {1,3}]+1 = {1,1,1,1,1} + {4,1} + {3,1,1} +{1,3,1} -->4
-f(2) + 3 = [{1+1}]+3 = {1,1,3}  -->1
+f(3) + 2 = [{3}]+1+1 = {1,1,3}  -->1
 f(1) + 4 = [{1}]+4 = {1,4} -->1
 anser = 6 ways
 generic formular
